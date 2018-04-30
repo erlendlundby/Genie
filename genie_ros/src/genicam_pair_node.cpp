@@ -32,7 +32,7 @@ int main(int argc, char **argv) {
     ros::param::param<std::string>("genicam/"+ genicam_params_id +"/camera_rgb_topic", cam_rgb_topic, "camera_rgb");
     ros::param::param<std::string>("genicam/"+ genicam_params_id +"/camera_mono_topic", cam_mono_topic, "camera_mono");
 
-    ROS_INFO(camera_pair_namespace.c_str());
+    cout << camera_pair_namespace << endl;
 
     ros::init(argc, argv, genicam_params_id);
     ros::NodeHandle nh(camera_pair_namespace);
@@ -62,7 +62,7 @@ int main(int argc, char **argv) {
 		return 0;
 	}
 
-        ROS_INFO("Opened cameras on ports %d and %d", RGB_CAM_PORT, MONO_CAM_PORT);
+        cout << "RGBN Camera Initialised." << "RGB:" << RGB_CAM_PORT << "mono" << MONO_CAM_PORT << endl;
 
     while (ros::ok()) {
 
