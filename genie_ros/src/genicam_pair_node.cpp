@@ -13,17 +13,22 @@ int main(int argc, char **argv) {
         string cam_pair_no = argv[1];
     }
 
-    string camera_pair_namespace;
+    string camera_pair_namespace = "can_pair_" + cam_pair_no;
 
     int RGB_CAM_PORT, MONO_CAM_PORT;
-    ros::param::get("genicam/cam_pair_" + cam_pair_no + "/pair_namespace", camera_pair_namespace);
-    ros::param::param<int>("genicam/cam_pair_" + cam_pair_no + "/camera_mono_port", RGB_CAM_PORT, 0);
-    ros::param::param<int>("genicam/cam_pair_" + cam_pair_no + "/camera_rgb_port", MONO_CAM_PORT, 1);
+    string cam_rgb_topic, cam_mono_topic;
+
+    ros::param::get("genicam/"+ camera_pair_namespace +"/pair_namespace", camera_pair_namespace);
+    ros::param::param<int>("genicam/"+ camera_pair_namespace +"/camera_mono_port", RGB_CAM_PORT, 0);
+    ros::param::param<int>("genicam/"+ camera_pair_namespace +"/camera_rgb_port", MONO_CAM_PORT, 1);
+    ros::param::param<std::string>("genicam/"+ camera_pair_namespace +"/camera_rgb_topic", cam_rgb_topic, "camera_rgb");
+    ros::param::param<std::string>("genicam/"+ camera_pair_namespace +"/camera_mono_topic", cam_mono_topic, "camera_mono");
 
     ros::init(argc, argv, "cam_pair_" + cam_pair_no);
     ros::NodeHandle nh;
-    ros::Publisher rgb_pub = nh.advertise<sensor_msgs::Image>("camera_rgb/image_raw", 100);
-    ros::Publisher mono_pub = nh.advertise<sensor_msgs::Image>("camera_mono/image_raw", 100);
+
+    ros::Publisher rgb_pub = nh.advertise<sensor_msgs::Image>(cam_rgb_topic, 100);
+    ros::Publisher mono_pub = nh.advertise<sensor_msgs::Image>(cam_mono_topic, 100);
 
     int rgb_count = 0;
     int mono_count = 0;
