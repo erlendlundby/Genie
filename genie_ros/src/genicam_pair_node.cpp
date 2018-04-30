@@ -19,6 +19,7 @@ int main(int argc, char **argv) {
 
     int RGB_CAM_PORT, MONO_CAM_PORT;
     string cam_rgb_topic, cam_mono_topic;
+    string camera_pair_namespace;
 
     ros::param::get("genicam/"+ genicam_params_id +"/pair_namespace", camera_pair_namespace);
     ros::param::param<int>("genicam/"+ genicam_params_id +"/camera_mono_port", RGB_CAM_PORT, 0);
