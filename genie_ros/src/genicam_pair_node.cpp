@@ -18,25 +18,25 @@ int main(int argc, char **argv) {
     else{
         cam_pair_no = "0";
     }
-
+ 
     string genicam_params_id = "cam_pair_" + cam_pair_no;
-    ROS_INFO(genicam_params_id);
+    cerr << genicam_params_id << endl;
+   
+    ros::init(argc, argv, genicam_params_id);
+    ros::NodeHandle nh;
 
     int RGB_CAM_PORT, MONO_CAM_PORT;
     string cam_rgb_topic, cam_mono_topic;
     string camera_pair_namespace;
 
-    ros::param::get("genicam/"+ genicam_params_id +"/pair_namespace", camera_pair_namespace);
-    ros::param::param<int>("genicam/"+ genicam_params_id +"/camera_mono_port", RGB_CAM_PORT, 0);
-    ros::param::param<int>("genicam/"+ genicam_params_id +"/camera_rgb_port", MONO_CAM_PORT, 1);
-    ros::param::param<std::string>("genicam/"+ genicam_params_id +"/camera_rgb_topic", cam_rgb_topic, "camera_rgb");
-    ros::param::param<std::string>("genicam/"+ genicam_params_id +"/camera_mono_topic", cam_mono_topic, "camera_mono");
+    nh.getParam("genicam/"+ genicam_params_id +"/pair_namespace", camera_pair_namespace);
+    nh.getParam("genicam/"+ genicam_params_id +"/camera_rgb_port", RGB_CAM_PORT);
+    nh.getParam("genicam/"+ genicam_params_id +"/camera_mono_port", MONO_CAM_PORT);
+    nh.getParam("genicam/"+ genicam_params_id +"/camera_rgb_topic", cam_rgb_topic);
+    nh.getParam("genicam/"+ genicam_params_id +"/camera_mono_topic", cam_mono_topic);
 
-    cout << camera_pair_namespace << endl;
-
-    ros::init(argc, argv, genicam_params_id);
-    ros::NodeHandle nh(camera_pair_namespace);
-
+    cerr << "topic:" << cam_rgb_topic << endl;
+    cerr << "rgb: " << RGB_CAM_PORT << " mono: " << MONO_CAM_PORT << endl;
     ros::Publisher rgb_pub = nh.advertise<sensor_msgs::Image>(cam_rgb_topic, 100);
     ros::Publisher mono_pub = nh.advertise<sensor_msgs::Image>(cam_mono_topic, 100);
 
@@ -62,7 +62,7 @@ int main(int argc, char **argv) {
 		return 0;
 	}
 
-        cout << "RGBN Camera Initialised." << "RGB:" << RGB_CAM_PORT << "mono" << MONO_CAM_PORT << endl;
+        cerr << "RGBN Camera Initialised." << "RGB:" << RGB_CAM_PORT << "mono" << MONO_CAM_PORT << endl;
 
     while (ros::ok()) {
 

@@ -6,7 +6,7 @@ genicam:
     camera_rgb_sn: "S123231"
     camera_rgb_port: 0
     camera_rgb_calib_url: "adr"
-    camera_rgb_topic: "camera_rgb"
+    camera_rgb_topic: "camera_rgb0"
     camera_mono_sn: "S231241"
     camera_mono_port: 1
     camera_mono_calib_url: "adr"
@@ -17,7 +17,7 @@ genicam:
     camera_rgb_sn: "S123231"
     camera_rgb_port: 2
     camera_rgb_calib_url: "adr"
-    camera_rgb_topic: "camera_rgb"
+    camera_rgb_topic: "camera_rgb1"
     camera_mono_sn: "S231241"
     camera_mono_port: 3
     camera_rgb_calib_url: "adr"
