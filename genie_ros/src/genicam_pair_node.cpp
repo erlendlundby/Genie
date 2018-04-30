@@ -32,7 +32,7 @@ int main(int argc, char **argv) {
     ros::param::param<std::string>("genicam/"+ genicam_params_id +"/camera_rgb_topic", cam_rgb_topic, "camera_rgb");
     ros::param::param<std::string>("genicam/"+ genicam_params_id +"/camera_mono_topic", cam_mono_topic, "camera_mono");
 
-    ROS_INFO(camera_pair_namespace);
+    ROS_INFO(camera_pair_namespace.c_str());
 
     ros::init(argc, argv, genicam_params_id);
     ros::NodeHandle nh(camera_pair_namespace);
