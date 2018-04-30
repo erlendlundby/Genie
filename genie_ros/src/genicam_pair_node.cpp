@@ -13,16 +13,16 @@ int main(int argc, char **argv) {
         string cam_pair_no = argv[1];
     }
 
-    string camera_pair_namespace = "can_pair_" + cam_pair_no;
+    string genicam_params_id = "cam_pair_" + cam_pair_no;
 
     int RGB_CAM_PORT, MONO_CAM_PORT;
     string cam_rgb_topic, cam_mono_topic;
 
-    ros::param::get("genicam/"+ camera_pair_namespace +"/pair_namespace", camera_pair_namespace);
-    ros::param::param<int>("genicam/"+ camera_pair_namespace +"/camera_mono_port", RGB_CAM_PORT, 0);
-    ros::param::param<int>("genicam/"+ camera_pair_namespace +"/camera_rgb_port", MONO_CAM_PORT, 1);
-    ros::param::param<std::string>("genicam/"+ camera_pair_namespace +"/camera_rgb_topic", cam_rgb_topic, "camera_rgb");
-    ros::param::param<std::string>("genicam/"+ camera_pair_namespace +"/camera_mono_topic", cam_mono_topic, "camera_mono");
+    ros::param::get("genicam/"+ genicam_params_id +"/pair_namespace", camera_pair_namespace);
+    ros::param::param<int>("genicam/"+ genicam_params_id +"/camera_mono_port", RGB_CAM_PORT, 0);
+    ros::param::param<int>("genicam/"+ genicam_params_id +"/camera_rgb_port", MONO_CAM_PORT, 1);
+    ros::param::param<std::string>("genicam/"+ genicam_params_id +"/camera_rgb_topic", cam_rgb_topic, "camera_rgb");
+    ros::param::param<std::string>("genicam/"+ genicam_params_id +"/camera_mono_topic", cam_mono_topic, "camera_mono");
 
     ros::init(argc, argv, "cam_pair_" + cam_pair_no);
     ros::NodeHandle nh;
