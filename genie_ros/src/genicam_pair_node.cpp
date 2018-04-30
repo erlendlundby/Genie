@@ -16,10 +16,11 @@ int main(int argc, char **argv) {
         cam_pair_no = argv[1];
     }
     else{
-    cam_pair_no = "0";
+        cam_pair_no = "0";
     }
 
     string genicam_params_id = "cam_pair_" + cam_pair_no;
+    ROS_INFO(genicam_params_id);
 
     int RGB_CAM_PORT, MONO_CAM_PORT;
     string cam_rgb_topic, cam_mono_topic;
