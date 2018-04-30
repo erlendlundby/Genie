@@ -1,0 +1,12 @@
+<launch>
+
+  <arg name ="nadir_pair_params_idx" value="0" />
+  <arg name="nadir_namespace" value="genicam_nadir" />
+  
+  <rosparam command="load" file="$(find genie)/genie_ros/params/genicam_config.yaml" />
+  
+  <node name = "genicam_nadir_node" pkg="genie" type="genicam_pair_node" args="0" ns="genicam_nadir" \>
+
+  </node>
+
+</launch>

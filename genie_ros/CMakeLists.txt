@@ -118,8 +118,10 @@ include_directories(
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
 add_executable(${PROJECT_NAME}_node src/genie_ros_node.cpp)
+add_executable(genicam_pair_node src/genicam_pair_node.cpp)
 
 add_dependencies(${PROJECT_NAME}_node GenieLib)
+add_dependencies(genicam_pair_node GenieLib)
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
 ## target back to the shorter version for ease of user use
@@ -132,6 +134,10 @@ add_dependencies(${PROJECT_NAME}_node GenieLib)
 
 ## Specify libraries to link a library or executable target against
 target_link_libraries(${PROJECT_NAME}_node
+  ${catkin_LIBRARIES} GenieLib
+)
+
+target_link_libraries(genicam_pair_node
   ${catkin_LIBRARIES} GenieLib
 )
 
