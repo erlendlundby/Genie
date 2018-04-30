@@ -11,10 +11,14 @@ int main(int argc, char **argv) {
 
     using namespace std;
 
-    string cam_pair_no = "0";
+    string cam_pair_no;
     if (argc > 1) {
         cam_pair_no = argv[1];
     }
+    else{
+    cam_pair_no = "0";
+    }
+
     string genicam_params_id = "cam_pair_" + cam_pair_no;
 
     int RGB_CAM_PORT, MONO_CAM_PORT;
@@ -28,7 +32,7 @@ int main(int argc, char **argv) {
     ros::param::param<std::string>("genicam/"+ genicam_params_id +"/camera_mono_topic", cam_mono_topic, "camera_mono");
 
     ros::init(argc, argv, genicam_params_id);
-    ros::NodeHandle nh;
+    ros::NodeHandle nh(camera_pair_namespace);
 
     ros::Publisher rgb_pub = nh.advertise<sensor_msgs::Image>(cam_rgb_topic, 100);
     ros::Publisher mono_pub = nh.advertise<sensor_msgs::Image>(cam_mono_topic, 100);
@@ -55,7 +59,7 @@ int main(int argc, char **argv) {
 		return 0;
 	}
 
-	cerr << "RGBN Camera Initialised." << endl;
+        cerr << "RGBN Camera Initialised." << endl;
 
     while (ros::ok()) {
 
