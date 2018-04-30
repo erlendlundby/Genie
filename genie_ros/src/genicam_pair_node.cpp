@@ -1,5 +1,6 @@
 #include <sstream>
 #include <AD_130GE.h>
+#include <string>
 
 #include <ros/ros.h>
 #include <sensor_msgs/Image.h>
@@ -8,10 +9,13 @@
 
 int main(int argc, char **argv) {
 
+    using namespace std;
+
     string cam_pair_no = "0";
     if (argc > 1) {
-        string genicam_params_id = "cam_pair_" + argv[1];
+        cam_pair_no = argv[1];
     }
+    string genicam_params_id = "cam_pair_" + cam_pair_no;
 
     int RGB_CAM_PORT, MONO_CAM_PORT;
     string cam_rgb_topic, cam_mono_topic;
