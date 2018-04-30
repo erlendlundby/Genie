@@ -10,10 +10,8 @@ int main(int argc, char **argv) {
 
     string cam_pair_no = "0";
     if (argc > 1) {
-        string cam_pair_no = argv[1];
+        string genicam_params_id = "cam_pair_" + argv[1];
     }
-
-    string genicam_params_id = "cam_pair_" + cam_pair_no;
 
     int RGB_CAM_PORT, MONO_CAM_PORT;
     string cam_rgb_topic, cam_mono_topic;
@@ -24,7 +22,7 @@ int main(int argc, char **argv) {
     ros::param::param<std::string>("genicam/"+ genicam_params_id +"/camera_rgb_topic", cam_rgb_topic, "camera_rgb");
     ros::param::param<std::string>("genicam/"+ genicam_params_id +"/camera_mono_topic", cam_mono_topic, "camera_mono");
 
-    ros::init(argc, argv, "cam_pair_" + cam_pair_no);
+    ros::init(argc, argv, genicam_params_id);
     ros::NodeHandle nh;
 
     ros::Publisher rgb_pub = nh.advertise<sensor_msgs::Image>(cam_rgb_topic, 100);
