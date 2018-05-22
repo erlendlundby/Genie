@@ -1,10 +1,12 @@
 <launch>
+ 
+  <node name="genicam_nadir_node" pkg="genie" type="genicam_pair_node" args="0 1" ns="nadir">
+   </node>
 
-  <arg name ="pair_idx" value="1" />
  
-  <node name="genicam_nadir_node" pkg="genie" type="genicam_pair_node" args="$(arg pair_idx)">
-  <rosparam command="load" file="$(find genie)/genie_ros/params/genicam_config.yaml" />
- 
-  </node>
+  <node name="genicam_side_node" pkg="genie" type="genicam_pair_node" args="2 3" ns="side">
+   </node>
+
+
 
 </launch>
