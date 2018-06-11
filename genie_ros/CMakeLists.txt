@@ -8,14 +8,21 @@ set(CMAKE_CXX_STANDARD 11)
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
-#find_package(catkin REQUIRED COMPONENTS
-#  roscpp
-#  std_msgs
-#)
+find_package(catkin REQUIRED COMPONENTS
+  roscpp
+  std_msgs
+  cv_bridge
+  image_transport
+)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
 
+# OpenCV
+find_package(OpenCV REQUIRED)
+
+set(extra_include_dirs ${extra_include_dirs} ${OpenCV_INCLUDE_DIRS})
+set(extra_libs ${extra_libs} ${OpenCV_LIBS})
 
 ## Uncomment this if the package has a setup.py. This macro ensures
 ## modules and global scripts declared therein get installed
@@ -102,6 +109,7 @@ set(CMAKE_CXX_STANDARD 11)
 ## Your package locations should be listed before other locations
 include_directories(
   ${catkin_INCLUDE_DIRS}
+  ${OpenCV_INCLUDE_DIRS}
 )
 
 ## Declare a C++ library
@@ -121,7 +129,7 @@ add_executable(${PROJECT_NAME}_node src/genie_ros_node.cpp)
 add_executable(genicam_pair_node src/genicam_pair_node.cpp)
 
 add_dependencies(${PROJECT_NAME}_node GenieLib)
-add_dependencies(genicam_pair_node GenieLib)
+add_dependencies(genicam_pair_node GenieLib ${OpenCV_LIBS})
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
 ## target back to the shorter version for ease of user use
@@ -130,7 +138,7 @@ add_dependencies(genicam_pair_node GenieLib)
 
 ## Add cmake target dependencies of the executable
 ## same as for the library above
-# add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+#add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
 target_link_libraries(${PROJECT_NAME}_node
@@ -156,9 +164,9 @@ target_link_libraries(genicam_pair_node
 # )
 
 ## Mark executables and/or libraries for installation
- install(TARGETS ${PROJECT_NAME}_node
-   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
- )
+## install(TARGETS ${PROJECT_NAME}_node
+##   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+##)
 
 ## Mark cpp header files for installation
 # install(DIRECTORY include/${PROJECT_NAME}/

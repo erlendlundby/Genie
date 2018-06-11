@@ -6,16 +6,17 @@ project(genie)
 #additional cmake definitions
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules/")
 
+
 #build the ROS interface if using catkin
-if(CATKIN_ENV)
+#if(CATKIN_ENV)
 	
-	find_package(catkin REQUIRED COMPONENTS
-		roscpp
-		std_msgs
-		sensor_msgs
-		cv_bridge
-		image_transport
-		)
+#	find_package(catkin REQUIRED COMPONENTS
+#		roscpp
+#		std_msgs
+#		sensor_msgs
+#		cv_bridge
+#		image_transport
+#		)
 
 	###################################
 	## catkin specific configuration ##
@@ -26,17 +27,17 @@ if(CATKIN_ENV)
 	## LIBRARIES: libraries you create in this project that dependent projects also need
 	## CATKIN_DEPENDS: catkin_packages dependent projects also need
 	## DEPENDS: system dependencies of this project that dependent projects also need
-	catkin_package(
+#	catkin_package(
 	#  INCLUDE_DIRS include
 	#  LIBRARIES genie_ros
-		CATKIN_DEPENDS roscpp std_msgs sensor_msgs cv_bridge image_transport
+#		CATKIN_DEPENDS roscpp std_msgs sensor_msgs cv_bridge image_transport
 	#  DEPENDS system_lib
-	)
+#	)
 	
-	add_subdirectory(genie_ros)
+	#add_subdirectory(genie_ros)
 
-endif(CATKIN_ENV)
+#endif(CATKIN_ENV)
 
 add_subdirectory(GenieLib)
 add_subdirectory(Apps)
-
+add_subdirectory(genie_ros)

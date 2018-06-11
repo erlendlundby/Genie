@@ -123,7 +123,7 @@ int main(int argc, char **argv) {
                 } 
        }
 
- //       rate.sleep();
+        rate.sleep();
         ros::spinOnce();
   }
 
